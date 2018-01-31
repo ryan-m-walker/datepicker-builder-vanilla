@@ -7,30 +7,42 @@ import reRender from './reRender';
 
 function DatePicker(root, date, config) {
   this.root = root;
-  this.init();
-  this.setDate();
+  this.init(date);
+  this.setDate(date);
 };
 
 
+DatePicker.prototype.init = function(date) {
 
-DatePicker.prototype.init = function() {
-  console.log('* * INITIALIZING DATE PICKER * *');
 };
 
+DatePicker.prototype.incrementMonth = function() {
+  this.setDate(this.date.add(1, 'month'));
+};
 
+DatePicker.prototype.decrementMonth = function() {
+  this.setDate(this.date.add(-1, 'month'));
+}
 
 DatePicker.prototype.render = render;
 DatePicker.prototype.reRender = reRender;
 
 
-
 DatePicker.prototype.setDate = function(date) {
-  this.calendar = calendarBuilder(date);
+  if (date && date._isAMomentObject) {
+    this.date = date;
+  } else if (date && !date._isAMomentObject) {
+    this.date = moment(date);
+  } else {
+    this.date = moment();
+  }
+  this.calendar = calendarBuilder(this.date);
   this.render();
+  console.log(this.calendar);
 };
 
 
 const myDatePicker = new DatePicker(document.getElementById('date-picker-root'));
 
 window['myDatePicker'] = myDatePicker;
-
+window['moment'] = moment;

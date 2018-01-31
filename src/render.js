@@ -9,7 +9,8 @@ const render = function() {
   };
 
   this.thead = document.createElement('thead');
-  this.
+  
+
 
   this.tbody = document.createElement('tbody');
   this.calendar.calendar.forEach((row) => {
