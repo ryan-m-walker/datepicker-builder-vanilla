@@ -6,6 +6,7 @@ module.exports = {
     path: path.join(__dirname, 'public'),
     filename: 'datepicker.js'
   },
+  devtool: 'source-map',
   module: {
     rules: [
       {
